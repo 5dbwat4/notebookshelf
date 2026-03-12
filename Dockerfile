@@ -17,4 +17,4 @@ WORKDIR /app
 COPY --from=build /app/dist public
 
 COPY ./bookshelf .
-COPY crawler.ts server.ts package.json .
+ENTRYPOINT [ "npm", "run", "server" ]

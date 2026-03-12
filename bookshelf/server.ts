@@ -1,9 +1,9 @@
 import express from 'express'
 import cors from 'cors'
-import { crawlConfiguredSites } from './bookshelf/crawler'
-import { NotebookShelfDB } from './bookshelf/database'
-import { loadSiteConfig } from './bookshelf/config'
-import type { SearchField } from './bookshelf/types'
+import { crawlConfiguredSites } from './crawler'
+import { NotebookShelfDB } from './database'
+import { loadSiteConfig } from './config'
+import type { SearchField } from './types'
 
 const app = express()
 const port = Number(process.env.PORT ?? 8787)

@@ -1,0 +1,12 @@
+# Backend server; expose config.yml into the container
+
+version: '3.8'
+services:
+  server:
+    build: .
+    ports:
+      - "8787:8787"
+    volumes:
+      - ./config.yml:/app/config.yml
+    environment:
+      - NODE_ENV=production
