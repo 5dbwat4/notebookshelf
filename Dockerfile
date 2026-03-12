@@ -17,4 +17,5 @@ WORKDIR /app
 COPY --from=build /app/dist public
 
 COPY ./bookshelf .
+RUN npm install
 ENTRYPOINT [ "npm", "run", "server" ]
