@@ -17,5 +17,13 @@ WORKDIR /app
 COPY --from=build /app/dist public
 
 COPY ./bookshelf .
+
+RUN apk add --no-cache python3 make g++ \
+    && ln -sf python3 /usr/bin/python
+
+ENV npm_config_python=/usr/bin/python \
+    NODE_GYP_FORCE_PYTHON=/usr/bin/python 
+    # to make node-gyp happy.
+
 RUN npm install
 ENTRYPOINT [ "npm", "run", "server" ]
