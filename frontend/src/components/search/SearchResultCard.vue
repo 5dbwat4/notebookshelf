@@ -10,7 +10,8 @@
       <a :href="item.url" target="_blank" rel="noopener noreferrer" v-html="sanitizeHtml(item.titleHighlighted || item.title)" />
     </h3>
 
-    <p class="snippet" v-html="sanitizeHtml(item.snippetHighlighted || item.snippet)" />
+    <!-- <p class="snippet" v-html="sanitizeHtml(item.snippetHighlighted || item.snippet)" /> -->
+    <p class="snippet" v-html="item.snippetHighlighted || item.snippet" />
 
     <p class="url">{{ prettyUrl }}</p>
   </UCard>
@@ -19,7 +20,7 @@
 <script setup lang="ts">
 import type { SearchItem } from '@/utils/search'
 import { computed } from 'vue'
-import sanitizeHtml from 'sanitize-html';
+// import sanitizeHtml from 'sanitize-html';
 
 const props = defineProps<{
   item: SearchItem

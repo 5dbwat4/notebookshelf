@@ -15,7 +15,7 @@
 <script setup lang="ts">
 import { computed, onMounted, onUnmounted, ref,h,resolveComponent } from 'vue'
 import type { ConfigSiteItem, ConfigStatusResponse } from '@/utils/config'
-import { type TableColumn } from '@nuxt/ui';
+// import type {TableColumn } from '@nuxt/ui';
 const UBadge = resolveComponent('UBadge')
 
 interface ConfigTableRow {
@@ -33,7 +33,7 @@ const loading = ref(false)
 const error = ref('')
 let timer: number | null = null
 
-const tableColumns: TableColumn<ConfigTableRow>[] = [
+const tableColumns = [
   { accessorKey: 'siteName', header: 'Site' },
   { accessorKey: 'searchIndexUrl', header: 'URL' },
   { accessorKey: 'statusLabel', header: 'Status' , 

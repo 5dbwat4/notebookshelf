@@ -24,7 +24,6 @@
     "express": "^5.2.1",
     "github-markdown-css": "^5.8.1",
     "sanitize-html": "^2.17.1",
-    "tailwindcss": "^4.1.18",
     "typescript": "^5.9.3",
     "unplugin-auto-import": "^21.0.0",
     "vite": "^7.3.1",
