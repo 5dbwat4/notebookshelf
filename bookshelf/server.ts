@@ -18,6 +18,7 @@ const crawlRuntimeState = {
 
 app.use(cors())
 app.use(express.json())
+app.use(express.static('public'))
 app.use((req, res, next) => {
 	const startedAt = Date.now()
 	console.log(`[req] ${req.method} ${req.originalUrl}`)
