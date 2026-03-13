@@ -7,6 +7,6 @@ services:
     ports:
       - "8787:8787"
     volumes:
-      - ./config.yml:/app/config.yml
+      - ./config.yml:/app/config.yml:ro
     environment:
       - NODE_ENV=production

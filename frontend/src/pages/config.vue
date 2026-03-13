@@ -97,7 +97,7 @@ async function loadStatus() {
   loading.value = true
   error.value = ''
   try {
-    const response = await fetch('/api/config')
+    const response = await fetch('./api/config')
     if (!response.ok) {
       throw new Error(`加载失败 (${response.status})`)
     }
