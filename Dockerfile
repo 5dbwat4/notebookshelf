@@ -6,7 +6,9 @@ WORKDIR /app
 
 # Copy the frontend source code
 COPY ./frontend/ .
-RUN npm install
+RUN npm install --registry=https://registry.npmmirror.com  
+    # Not need the --registry option if you are in a region with good access to the default npm registry.
+    
 RUN npm run build
 
 
