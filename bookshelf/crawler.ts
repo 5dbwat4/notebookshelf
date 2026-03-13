@@ -45,16 +45,26 @@ function docToAbsoluteUrl(baseUrl: string, location: string): string {
   return new URL(location || '.', ensureTrailingSlash(baseUrl)).toString()
 }
 
-async function fetchSearchIndex(searchIndexUrl: string): Promise<MkdocsSearchIndex> {
-  const response = await fetch(searchIndexUrl, {
-    signal: AbortSignal.timeout(20_000)
-  })
+async function fetchSearchIndex(searchIndexUrl: string, retries = 3, delayMs = 2000): Promise<MkdocsSearchIndex> {
+  for (let attempt = 1; attempt <= retries; attempt++) {
+    try {
+      const response = await fetch(searchIndexUrl, {
+        signal: AbortSignal.timeout(20_000)
+      })
 
-  if (!response.ok) {
-    throw new Error(`Failed to fetch ${searchIndexUrl}: ${response.status} ${response.statusText}`)
+      if (!response.ok) {
+        throw new Error(`Failed to fetch ${searchIndexUrl}: ${response.status} ${response.statusText}`)
+      }
+
+      return (await response.json()) as MkdocsSearchIndex
+    } catch (error) {
+      if (attempt === retries) {
+        throw error
+      }
+      await new Promise(res => setTimeout(res, delayMs))
+    }
   }
-
-  return (await response.json()) as MkdocsSearchIndex
+  throw new Error(`Failed to fetch ${searchIndexUrl} after ${retries} attempts`)
 }
 
 function normalizeSiteName(baseUrl: string): string {
@@ -158,4 +168,11 @@ async function main() {
   if (summary.failedSites > 0) {
     console.warn(`Warning: ${summary.failedSites} site(s) failed during this run.`)
   }
+}
+
+if (require.main === module) {
+  main().catch(error => {
+    console.error('Error during crawl:', error instanceof Error ? error.message : error)
+    process.exit(1)
+  })
 }
