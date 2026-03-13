@@ -150,7 +150,7 @@ export async function crawlConfiguredSites(hooks?: CrawlHooks) {
 
 
 
-async function main() {
+export async function main() {
   const summary = await crawlConfiguredSites()
 
   console.log('Crawl complete')
@@ -170,9 +170,3 @@ async function main() {
   }
 }
 
-if (require.main === module) {
-  main().catch(error => {
-    console.error('Error during crawl:', error instanceof Error ? error.message : error)
-    process.exit(1)
-  })
-}

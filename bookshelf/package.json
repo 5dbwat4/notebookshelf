@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "server": "tsx server.ts",
-    "crawl": "tsx crawler.ts"
+    "crawl": "tsx crawl-standalone.ts"
   },
   "dependencies": {
     "better-sqlite3": "^12.6.2",
