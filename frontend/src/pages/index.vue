@@ -98,7 +98,7 @@ async function fetchSearch() {
       pageSize: String(pageSize)
     })
 
-    const response = await fetch(`/api/search?${params.toString()}`)
+    const response = await fetch(`./api/search?${params.toString()}`)
     if (!response.ok) {
       throw new Error(`搜索失败 (${response.status})`)
     }
