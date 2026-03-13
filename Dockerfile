@@ -21,10 +21,10 @@ ENV npm_config_python=/usr/bin/python \
     NODE_GYP_FORCE_PYTHON=/usr/bin/python 
     # to make node-gyp happy.
 
-
-COPY --from=build /app/dist public
-
 COPY ./bookshelf .
 
-RUN npm install
+RUN npm install --registry=https://registry.npmmirror.com 
+    # Not need the --registry option if you are in a region with good access to the default npm registry.
+
+COPY --from=build /app/dist public
 ENTRYPOINT [ "npm", "run", "server" ]
